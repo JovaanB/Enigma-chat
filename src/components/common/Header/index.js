@@ -4,7 +4,9 @@ import React from "react";
 const Header = () => {
     return (
         <AppBar position="static">
-            <Typography variant="h4">ENIGMA CHAT</Typography>
+            <Typography marginX={2} marginY={1} variant="h5">
+                ENIGMA CHAT
+            </Typography>
         </AppBar>
     );
 };
