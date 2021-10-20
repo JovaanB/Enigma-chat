@@ -36,7 +36,7 @@ const Chat = ({ location }) => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const classes = useStyles();
-    const ENDPOINT = "https://enigma-chat-web.herokuapp.com";
+    const ENDPOINT = process.env.REACT_APP_API;
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);

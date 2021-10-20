@@ -59,7 +59,7 @@ const Join = () => {
 
     const handleLogin = (e) => {
         (!name || !room) && e.preventDefault();
-        fetch(`https://enigma-chat-web.herokuapp.com/api/login?name=${name}`)
+        fetch(`${process.env.REACT_APP_API}/api/login?name=${name}`)
             .then((response) => response.json())
             .then((data) => {
                 if (data) {

@@ -11,7 +11,6 @@ const UserList = ({ users, userConnected }) => {
         <List>
             {users.map((user, i) => {
                 const itsMe = user.name === userConnected;
-                console.log(i, itsMe);
                 return (
                     <ListItem button key={i}>
                         <ListItemIcon>
