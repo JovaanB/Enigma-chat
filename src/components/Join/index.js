@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { TimelineMax, Power1 } from "gsap/all";
-
+import { TimelineMax, Power1, gsap } from "gsap/all";
+import { CSSPlugin } from "gsap/CSSPlugin";
 import { Grid, TextField, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Layout from "../common/Layout";
 import toast from "react-hot-toast";
+
+gsap.registerPlugin(CSSPlugin);
 
 const useStyles = makeStyles(() => ({
     root: {
