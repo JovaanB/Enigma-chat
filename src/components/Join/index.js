@@ -57,7 +57,7 @@ const Join = () => {
 
     const handleLogin = (e) => {
         (!name || !room) && e.preventDefault();
-        fetch(`http://localhost:4000/api/login?name=${name}`)
+        fetch(`https://enigma-chat-web.herokuapp.com:4000/api/login?name=${name}`)
             .then((response) => response.json())
             .then((data) => {
                 if (data) {
