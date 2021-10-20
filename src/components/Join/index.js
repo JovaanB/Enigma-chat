@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { TimelineMax, Power1 } from "gsap/all";
 
 import { Grid, TextField, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -20,10 +21,38 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Join = () => {
+    const [tl] = useState(new TimelineMax({ paused: true }));
     const [name, setName] = useState("");
     const [room, setRoom] = useState("");
 
     const classes = useStyles();
+
+    let isFirstRender = true;
+    let inputName = null;
+    let inputRoom = null;
+    let buttonJoin = null;
+
+    useEffect(() => {
+        tl.from(inputName, 0.3, {
+            display: "none",
+            autoAlpha: 0,
+            delay: 0.25,
+            ease: Power1.easeIn,
+        })
+            .from(inputRoom, 0.25, {
+                display: "none",
+                autoAlpha: 0,
+                delay: 0.25,
+                ease: Power1.easeInOut,
+            })
+            .from(buttonJoin, 0.25, {
+                display: "none",
+                autoAlpha: 0,
+                delay: 0.25,
+                ease: Power1.easeInOut,
+            })
+            .play();
+    }, []);
 
     return (
         <Layout>
@@ -31,6 +60,7 @@ const Join = () => {
                 <Grid container spacing={3} direction={"column"} justify={"center"} alignItems={"center"}>
                     <Grid item xs={12}>
                         <TextField
+                            ref={(e) => (inputName = e)}
                             variant="filled"
                             required
                             label="Nom d'utilisateur"
@@ -40,6 +70,7 @@ const Join = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            ref={(e) => (inputRoom = e)}
                             variant="filled"
                             required
                             label="Votre salle"
@@ -52,7 +83,7 @@ const Join = () => {
                             onClick={(e) => (!name || !room ? e.preventDefault() : null)}
                             to={`/chat?name=${name}&room=${room}`}
                         >
-                            <Button variant="contained" color="primary" fullWidth>
+                            <Button ref={(e) => (buttonJoin = e)} variant="contained" color="primary" fullWidth>
                                 Se connecter
                             </Button>
                         </Link>
