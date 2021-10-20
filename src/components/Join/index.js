@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { TimelineMax, Power1 } from "gsap/all";
 
 import { Grid, TextField, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Layout from "../common/Layout";
+import toast from "react-hot-toast";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -24,10 +25,10 @@ const Join = () => {
     const [tl] = useState(new TimelineMax({ paused: true }));
     const [name, setName] = useState("");
     const [room, setRoom] = useState("");
+    const history = useHistory();
 
     const classes = useStyles();
 
-    let isFirstRender = true;
     let inputName = null;
     let inputRoom = null;
     let buttonJoin = null;
@@ -54,6 +55,18 @@ const Join = () => {
             .play();
     }, []);
 
+    const handleLogin = (e) => {
+        (!name || !room) && e.preventDefault();
+        fetch(`http://localhost:4000/api/login?name=${name}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    history.push(`/chat?name=${name}&room=${room}`);
+                    toast.success("Bravo! Tu es connecté");
+                } else toast.error("Hors de ma vue, sale imposteur!");
+            });
+    };
+
     return (
         <Layout>
             <div className={classes.root}>
@@ -79,14 +92,16 @@ const Join = () => {
                         ></TextField>
                     </Grid>
                     <Grid item xs={12}>
-                        <Link
-                            onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-                            to={`/chat?name=${name}&room=${room}`}
+                        <Button
+                            ref={(e) => (buttonJoin = e)}
+                            onClick={handleLogin}
+                            disabled={!name || !room}
+                            variant="contained"
+                            color="primary"
+                            fullWidth
                         >
-                            <Button ref={(e) => (buttonJoin = e)} variant="contained" color="primary" fullWidth>
-                                Se connecter
-                            </Button>
-                        </Link>
+                            Se connecter
+                        </Button>
                     </Grid>
                 </Grid>
             </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import queryString from "query-string";
 import io from "socket.io-client";
 
@@ -33,6 +32,7 @@ const useStyles = makeStyles({
 const Chat = ({ location }) => {
     const [name, setName] = useState("");
     const [room, setRoom] = useState("");
+    const [isAuthorized, setIsAuthorized] = useState(false);
     const [users, setUsers] = useState([]);
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
