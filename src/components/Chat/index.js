@@ -36,7 +36,7 @@ const Chat = ({ location }) => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const classes = useStyles();
-    const ENDPOINT = "localhost:5000";
+    const ENDPOINT = "https://enigma-chat-web.herokuapp.com/";
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
@@ -94,7 +94,7 @@ const Chat = ({ location }) => {
                             </ListItem>
                         </List>
                         <Divider />
-                        <UserList users={users} />
+                        <UserList users={users} userConnected={name} />
                     </Grid>
                     <Grid item xs={9}>
                         <MessageList messages={messages} user={name} />

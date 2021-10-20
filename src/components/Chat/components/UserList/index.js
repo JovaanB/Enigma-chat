@@ -6,20 +6,24 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Badge from "@mui/material/Badge";
 
-const UserList = ({ users }) => {
+const UserList = ({ users, userConnected }) => {
     return (
         <List>
-            {users.map((user, i) => (
-                <ListItem button key={i}>
-                    <ListItemIcon>
-                        <Badge overlap="circular" variant="dot" color="success" badgeContent=" ">
-                            <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/1.jpg" />
-                        </Badge>
-                    </ListItemIcon>
-                    <ListItemText primary={user.name}>{user.name}</ListItemText>
-                    <ListItemText secondary="En ligne" align="right"></ListItemText>
-                </ListItem>
-            ))}
+            {users.map((user, i) => {
+                const itsMe = user.name === userConnected;
+                console.log(i, itsMe);
+                return (
+                    <ListItem button key={i}>
+                        <ListItemIcon>
+                            <Badge overlap="circular" variant="dot" color="success" badgeContent=" ">
+                                <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/1.jpg" />
+                            </Badge>
+                        </ListItemIcon>
+                        <ListItemText primary={itsMe ? <b>{user.name}</b> : user.name}>{user.name}</ListItemText>
+                        <ListItemText secondary="En ligne" align="right"></ListItemText>
+                    </ListItem>
+                );
+            })}
         </List>
     );
 };
