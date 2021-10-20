@@ -32,7 +32,6 @@ const useStyles = makeStyles({
 const Chat = ({ location }) => {
     const [name, setName] = useState("");
     const [room, setRoom] = useState("");
-    const [isAuthorized, setIsAuthorized] = useState(false);
     const [users, setUsers] = useState([]);
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
