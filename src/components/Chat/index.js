@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import io from "socket.io-client";
 
@@ -37,6 +38,7 @@ const Chat = ({ location }) => {
     const [messages, setMessages] = useState([]);
     const classes = useStyles();
     const ENDPOINT = process.env.REACT_APP_API;
+    const history = useHistory();
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
@@ -75,7 +77,7 @@ const Chat = ({ location }) => {
     };
 
     return (
-        <Layout>
+        <Layout isChat>
             <div>
                 <Grid container component={Paper} className={classes.chatSection}>
                     <Grid item xs={3} className={classes.borderRight500}>
@@ -87,7 +89,7 @@ const Chat = ({ location }) => {
                                         marginX={3}
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            window.location = "/";
+                                            history.push("/");
                                         }}
                                     />
                                 </Box>
