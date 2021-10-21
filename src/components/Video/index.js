@@ -7,6 +7,7 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import PhoneIcon from "@material-ui/icons/Phone";
 import { makeStyles } from "@material-ui/core/styles";
 import toast from "react-hot-toast";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
 import io from "socket.io-client";
 import Layout from "../common/Layout";
@@ -141,7 +142,6 @@ const Video = () => {
     };
 
     const copyTextToClipboard = (text) => {
-        console.log("text: ", text);
         if (!navigator.clipboard) {
             toast.error("Erreur lors de la copie de l'ID");
             return;
@@ -188,14 +188,11 @@ const Video = () => {
                         onChange={(e) => setName(e.target.value)}
                         style={{ marginBottom: "20px" }}
                     />
-                    <Button
-                        variant="contained"
-                        onClick={() => copyTextToClipboard(me)}
-                        color="primary"
-                        startIcon={<AssignmentIcon fontSize="large" />}
-                    >
-                        Copier ID
-                    </Button>
+                    <CopyToClipboard text={me}>
+                        <Button variant="contained" color="primary" startIcon={<AssignmentIcon fontSize="large" />}>
+                            Copier ID
+                        </Button>
+                    </CopyToClipboard>
                     <TextField
                         id="filled-basic"
                         label="ID du partenaire"
