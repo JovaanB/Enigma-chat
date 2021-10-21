@@ -141,6 +141,7 @@ const Video = () => {
     };
 
     const copyTextToClipboard = (text) => {
+        console.log("text: ", text);
         if (!navigator.clipboard) {
             toast.error("Erreur lors de la copie de l'ID");
             return;
@@ -181,7 +182,7 @@ const Video = () => {
                 <div className={classes.myId}>
                     <TextField
                         id="filled-basic"
-                        label="Name"
+                        label="Nom"
                         variant="filled"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -197,7 +198,7 @@ const Video = () => {
                     </Button>
                     <TextField
                         id="filled-basic"
-                        label="ID to call"
+                        label="ID du partenaire"
                         variant="filled"
                         value={idToCall}
                         onChange={(e) => setIdToCall(e.target.value)}
