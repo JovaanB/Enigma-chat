@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { TimelineMax, Power1, gsap } from "gsap/all";
 import { CSSPlugin } from "gsap/CSSPlugin";
-import { Grid, TextField, Button } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Grid, TextField, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import Layout from "../common/Layout";
 import toast from "react-hot-toast";
 

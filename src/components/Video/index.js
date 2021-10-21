@@ -7,14 +7,14 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import PhoneIcon from "@material-ui/icons/Phone";
 import { makeStyles } from "@material-ui/core/styles";
 import toast from "react-hot-toast";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
 import io from "socket.io-client";
 import Layout from "../common/Layout";
 import { ArrowBack } from "@material-ui/icons";
 import { Typography } from "@material-ui/core";
 
-const socket = io.connect(process.env.REACT_APP_API);
+const ENDPOINT = process.env.REACT_APP_API;
+const socket = io(ENDPOINT);
 
 const useStyles = makeStyles({
     container: {
@@ -82,6 +82,7 @@ const Video = () => {
         });
 
         socket.on("me", (id) => {
+            console.log("id: ", id);
             setMe(id);
         });
 
@@ -188,11 +189,14 @@ const Video = () => {
                         onChange={(e) => setName(e.target.value)}
                         style={{ marginBottom: "20px" }}
                     />
-                    <CopyToClipboard text={me}>
-                        <Button variant="contained" color="primary" startIcon={<AssignmentIcon fontSize="large" />}>
-                            Copier ID
-                        </Button>
-                    </CopyToClipboard>
+                    <Button
+                        onClick={() => copyTextToClipboard(me)}
+                        variant="contained"
+                        color="primary"
+                        startIcon={<AssignmentIcon fontSize="large" />}
+                    >
+                        Copier ID
+                    </Button>
                     <TextField
                         id="filled-basic"
                         label="ID du partenaire"

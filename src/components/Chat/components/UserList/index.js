@@ -4,7 +4,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Badge from "@mui/material/Badge";
+import Badge from "@material-ui/core/Badge";
 
 const UserList = ({ users, userConnected }) => {
     return (

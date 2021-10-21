@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ScrollToBottom from "react-scroll-to-bottom";
 import ReactEmoji from "react-emoji";
-import { Typography } from "@mui/material";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
     messageArea: {
@@ -71,7 +71,7 @@ const MessageList = ({ messages, user }) => {
                 {messages.map((message, i) => {
                     const isSentByCurrentUser = user === message.user;
                     return isSentByCurrentUser ? (
-                        <div className={`${classes.messageContainer} ${classes.justifyEnd}`}>
+                        <div key={i} className={`${classes.messageContainer} ${classes.justifyEnd}`}>
                             <Typography variant="subtitle2" className={`${classes.sentText} ${classes.pr10}`}>
                                 {message.user}
                             </Typography>
@@ -85,7 +85,7 @@ const MessageList = ({ messages, user }) => {
                             </div>
                         </div>
                     ) : (
-                        <div className={`${classes.messageContainer} ${classes.justifyStart}`}>
+                        <div key={i} className={`${classes.messageContainer} ${classes.justifyStart}`}>
                             <div className={`${classes.messageBox} ${classes.backgroundLight}`}>
                                 <Typography
                                     variant="subtitle1"
